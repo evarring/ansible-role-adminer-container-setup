@@ -1,0 +1,37 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for adminer_container_setup
+
+- name: Ensure adminer container volume directories exist
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0744'
+    owner: "{{ ansible_user | default(root) }}"
+    group: "{{ ansible_user | default(root) }}"
+  loop:
+    - "{{ mariadb_container_setup_dir }}"
+  become: true
+
+- name: Create networks
+  community.docker.docker_network:
+    name: "{{ item.name }}"
+  loop: "{{ mariadb_container_setup_networks }}"
+  become: true
+
+- name: Create adminer container
+  community.docker.docker_container:
+    name: "{{ adminer_container_setup_name }}"
+    image: "{{ adminer_container_setup_image }}"
+    state: "{{ adminer_container_setup_state | default('started') }}"
+    network_mode: "{{ adminer_container_setup_network_mode }}"
+    networks: "{{ adminer_container_setup_networks }}"
+    healthcheck: "{{ adminer_container_setup_healthcheck | default(omit) }}"
+    recreate: "{{ adminer_container_setup_recreate }}"
+    privileged: "{{ adminer_container_setup_privileged }}"
+    user: "{{ mariadb_container_setup_user_uid_gid | default(omit) }}"
+    ports: "{{ adminer_container_setup_ports }}"
+    env: "{{ adminer_container_setup_env | default(omit) }}"
+    labels: "{{ adminer_container_setup_labels }}"
+    restart_policy: "{{ adminer_container_setup_restart_policy }}"
+  when: mariadb_container_setup_deploy_adminer is true

@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: MIT-0
+---
+# defaults file for adminer_container_setup
+
+adminer_container_setup_name: adminer
+adminer_container_setup_image: adminer:standalone
+
+adminer_container_setup_labels:
+  traefik.enable: "false"
+
+adminer_container_setup_networks:
+  - name: adminer
+
+adminer_container_setup_recreate: true
+adminer_container_setup_privileged: false
+adminer_container_setup_restart_policy: unless-stopped
