@@ -1,3 +1,12 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # handlers file for adminer_container_setup
+
+- name: Stop container
+  community.docker.docker_container:
+    name: "{{ adminername_item }}"
+    state: "stopped"
+  loop:
+    - "{{ adminer_container_setup_name }}"
+  loop_control:
+    loop_var: adminername_item

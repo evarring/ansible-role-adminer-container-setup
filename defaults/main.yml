@@ -11,6 +11,6 @@ adminer_container_setup_labels:
 adminer_container_setup_networks:
   - name: adminer
 
-adminer_container_setup_recreate: true
+adminer_container_setup_recreate: false
 adminer_container_setup_privileged: false
 adminer_container_setup_restart_policy: unless-stopped
