@@ -10,7 +10,7 @@
         name: "{{ adminerimage_item }}"
         source: pull
       loop:
-        - "{{ adminer_container_setup_server_image }}"
+        - "{{ adminer_container_setup_image }}"
       loop_control:
         loop_var: adminerimage_item
 
