@@ -13,6 +13,11 @@
         - "{{ adminer_container_setup_image }}"
       loop_control:
         loop_var: adminerimage_item
+      register: adminer_image_pull_result
+
+    - name: Flush handlers immediately
+      ansible.builtin.meta: flush_handlers
+      when: adminer_image_pull_result.changed # noqa: no-handler
 
 - name: Ensure adminer container is stopped when recreating
   when: adminer_container_setup_recreate
