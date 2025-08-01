@@ -8,6 +8,9 @@ adminer_container_setup_image: adminer:standalone
 adminer_container_setup_labels:
   traefik.enable: "false"
 
+adminer_container_setup_cpus: 0.5
+adminer_container_setup_memory: 128M
+
 adminer_container_setup_networks:
   - name: adminer
 

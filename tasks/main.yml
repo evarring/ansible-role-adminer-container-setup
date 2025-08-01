@@ -50,6 +50,8 @@
     state: "{{ adminer_container_setup_state | default('started') }}"
     network_mode: "{{ adminer_container_setup_network_mode }}"
     networks: "{{ adminer_container_setup_networks }}"
+    cpus: "{{ adminer_container_setup_cpus }}"
+    memory: "{{ adminer_container_setup_memory }}"
     healthcheck: "{{ adminer_container_setup_healthcheck | default(omit) }}"
     recreate: "{{ adminer_container_setup_recreate }}"
     privileged: "{{ adminer_container_setup_privileged }}"
